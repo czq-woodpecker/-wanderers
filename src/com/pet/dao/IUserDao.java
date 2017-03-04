@@ -1,5 +1,9 @@
 package com.pet.dao;
 
+import java.util.List;
+
+import com.pet.model.User;
+
 public interface IUserDao
 {
 	public void add(User user);

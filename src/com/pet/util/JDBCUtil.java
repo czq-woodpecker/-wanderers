@@ -9,7 +9,7 @@ import java.sql.SQLException;
 public class JDBCUtil
 {
 	private static String username = "root";
-	private static String password = "root";
+	private static String password = "360mima";
 	private static String database = "pets";
 
 	//创建与数据库的连接
