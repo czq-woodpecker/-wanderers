@@ -13,7 +13,7 @@ public class UserDao implements IUserDao
 {
 
 	@Override
-	public void add(User user) 
+	public boolean add(User user) 
 	{
 		
 		Connection connection = null;
@@ -35,13 +35,9 @@ public class UserDao implements IUserDao
 			{
 				if(resultSet.getInt(1)>0)
 				{
-					throw new Exception("要添加的用户已存在，不能继续添加");
+					return false;
 				}
 			}
-//			if(count > 0 )
-//			{
-//				throw new ShopException("要添加的用户已存在，不能继续添加");
-//			}
 			sql = "insert into t_user (username,password,nickname) value (?,?,?)";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, user.getUsername());
@@ -51,6 +47,7 @@ public class UserDao implements IUserDao
 //			preparedStatement.setInt(5, user.getStatus());
 			//4.更新至数据库
 			preparedStatement.executeUpdate();
+			
 		
 		} 
 		catch (Exception e)
@@ -63,10 +60,11 @@ public class UserDao implements IUserDao
 			JDBCUtil.close(preparedStatement);
 			JDBCUtil.close(connection);
 		}
+		return true;
 	}
 
 	@Override
-	public void delete(int id)
+	public boolean delete(int id)
 	{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -76,12 +74,12 @@ public class UserDao implements IUserDao
 			User user = this.load(id);
 			if(user.getUsername().equals("admin"))
 			{
-				throw new Exception("超级管理员admin不能被删除");
+				return false;	//删除失败   超级管理员无法删除
 			}
 			String sql = "delete from t_user where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);
-			preparedStatement.executeUpdate();		
+			preparedStatement.executeUpdate();
 		} 
 		catch (Exception e)
 		{
@@ -92,10 +90,11 @@ public class UserDao implements IUserDao
 			JDBCUtil.close(preparedStatement);
 			JDBCUtil.close(connection);
 		}
+		return true;
 	}
 
 	@Override
-	public void update(User user)
+	public boolean update(User user)
 	{
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -109,17 +108,19 @@ public class UserDao implements IUserDao
 //			preparedStatement.setInt(3, user.getType());
 //			preparedStatement.setInt(4, user.getStatus());
 			preparedStatement.setInt(3,user.getId());
-			preparedStatement.executeUpdate();		
+			preparedStatement.executeUpdate();	
+			
 		} 
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			return false;
 		}
 		finally
 		{
 			JDBCUtil.close(preparedStatement);
 			JDBCUtil.close(connection);
 		}
+		return true;
 	}
 
 	@Override
@@ -223,17 +224,11 @@ public class UserDao implements IUserDao
 				user.setNickname(resultSet.getString("nickname"));
 //				user.setType(resultSet.getInt("type"));
 //				user.setStatus(resultSet.getInt("status"));
-			}
-
-//			if(user == null)
-//			{
-//				throw new Exception("用户名不存在");
-//			}
-			
+			}			
 			if(!user.getPassword().equals(password))
 			{
 				
-//				throw new Exception("用户密码不正确");
+
 				user = null;
 			}
 //			if(user.getStatus() == 1)

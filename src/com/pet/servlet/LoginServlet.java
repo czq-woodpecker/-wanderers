@@ -27,12 +27,18 @@ public class LoginServlet extends HttpServlet
 		String password = request.getParameter("password");
 		IUserDao userDao = DaoFactory.getUserDao();
 		User user = userDao.login(username, password);
-		if(user == null)
+		if(user == null)	
 		{
+			//登录失败
 			request.setAttribute("error", "用户名或密码错误");
 			request.setAttribute("username",username);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
+		}
+		else
+		{
+			//登录成功
+			System.out.println("login sucess!!!");
 		}
 		
 	}
