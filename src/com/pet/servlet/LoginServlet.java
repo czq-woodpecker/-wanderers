@@ -2,7 +2,7 @@ package com.pet.servlet;
 
 import java.io.IOException;
 
-import javax.jms.Session;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
