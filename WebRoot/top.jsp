@@ -28,17 +28,23 @@
                                          </ul>
                                  </li>
                                  <li><a href="#">关于我们</a></li>
-                                 <li>
-	                                 <c:choose>
-		                                 <c:when test="<%=currentUser==null %>">
-		                                	 <a href="login.jsp">登录/注册</a>
-		                                 </c:when>
-		                                 <c:otherwise>
-		                                 	<a>当前用户：<%=currentUser.getNickname() %></a>
-		                                 </c:otherwise>
-	                                 </c:choose>
-                                 </li>
-                                 
+                                 <li>                  
+	                           		<c:choose>
+	                            	<c:when test="<%=currentUser==null %>">
+	                           	 	<a href="login.jsp">登录/注册</a>
+	                            	</c:when>
+	                            	<c:otherwise>
+	                            	<li><a>当前用户：<%=currentUser.getNickname() %></a>	                                 	
+		                            	<ul class="sub-menu">
+		                                	<li><a href="">个人中心</a></li>
+		                                	<li><a href="logout.jsp">退出</a></li>
+		                                </ul> 
+	                                </li>
+	                                  	  
+	                            </c:otherwise>
+	                           </c:choose> 
+                            </li>                                                   
+                                                                
                              </ul>
                         </div>
                     </nav>
