@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  <filter>
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app id="WebApp_ID">
+	<display-name>cat</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+	<filter>
     <filter-name>CharEncoding</filter-name>
     <filter-class>com.pet.filter.CharFilter</filter-class>
     <init-param>
@@ -23,8 +33,6 @@
   		<url-pattern>/admin/*</url-pattern>  <!-- 分配权限 -->
 	</filter-mapping>
 	
-
-
   <servlet>
     <servlet-name>loginServlet</servlet-name>
     <servlet-class>com.pet.servlet.LoginServlet</servlet-class>
