@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.pet.model.User;
-import com.pet.util.DbUtil;
+import com.pet.util.JDBCUtil;
 
 public class UserDao implements IUserDao
 {
@@ -22,7 +22,7 @@ public class UserDao implements IUserDao
 		try
 		{
 			//1.创建与数据库的连接
-			connection = DbUtil.getCon();
+			connection = JDBCUtil.getConnection();
 			String sql = "select count(*) from t_user where username = ?";
 			//2.预处理
 			preparedStatement = connection.prepareStatement(sql);
@@ -56,9 +56,9 @@ public class UserDao implements IUserDao
 		}
 		finally
 		{
-			DbUtil.close(resultSet);
-			DbUtil.close(preparedStatement);
-			DbUtil.close(connection);
+			JDBCUtil.close(resultSet);
+			JDBCUtil.close(preparedStatement);
+			JDBCUtil.close(connection);
 		}
 		return true;
 	}
@@ -70,7 +70,7 @@ public class UserDao implements IUserDao
 		PreparedStatement preparedStatement = null;
 		try
 		{
-			connection = DbUtil.getCon();
+			connection = JDBCUtil.getConnection();
 			User user = this.load(id);
 			if(user.getUsername().equals("admin"))
 			{
@@ -87,8 +87,8 @@ public class UserDao implements IUserDao
 		}
 		finally
 		{
-			DbUtil.close(preparedStatement);
-			DbUtil.close(connection);
+			JDBCUtil.close(preparedStatement);
+			JDBCUtil.close(connection);
 		}
 		return true;
 	}
@@ -100,7 +100,7 @@ public class UserDao implements IUserDao
 		PreparedStatement preparedStatement = null;
 		try
 		{
-			connection = DbUtil.getCon();
+			connection = JDBCUtil.getConnection();
 			String sql = "update t_user set password = ?,nickname = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, user.getPassword());
@@ -117,8 +117,8 @@ public class UserDao implements IUserDao
 		}
 		finally
 		{
-			DbUtil.close(preparedStatement);
-			DbUtil.close(connection);
+			JDBCUtil.close(preparedStatement);
+			JDBCUtil.close(connection);
 		}
 		return true;
 	}
@@ -132,7 +132,7 @@ public class UserDao implements IUserDao
 		User user = null;
 		try
 		{
-			connection = DbUtil.getCon();
+			connection = JDBCUtil.getConnection();
 			String sql = "select * from t_user where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, id);			
@@ -154,9 +154,9 @@ public class UserDao implements IUserDao
 		}
 		finally
 		{
-			DbUtil.close(resultSet);
-			DbUtil.close(preparedStatement);
-			DbUtil.close(connection);
+			JDBCUtil.close(resultSet);
+			JDBCUtil.close(preparedStatement);
+			JDBCUtil.close(connection);
 		}
 		return user;
 	}
@@ -168,10 +168,10 @@ public class UserDao implements IUserDao
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
 		User user = null;
-		List<User> users = new ArrayList<User>();
+		List<User> users = new ArrayList<>();
 		try
 		{
-			connection = DbUtil.getCon();
+			connection = JDBCUtil.getConnection();
 			String sql = "select * from t_user";
 			preparedStatement = connection.prepareStatement(sql);		
 			resultSet = preparedStatement.executeQuery();
@@ -193,9 +193,9 @@ public class UserDao implements IUserDao
 		}
 		finally
 		{
-			DbUtil.close(resultSet);
-			DbUtil.close(preparedStatement);
-			DbUtil.close(connection);
+			JDBCUtil.close(resultSet);
+			JDBCUtil.close(preparedStatement);
+			JDBCUtil.close(connection);
 		}
 		return users;
 		
@@ -210,7 +210,7 @@ public class UserDao implements IUserDao
 		User user = null;
 		try
 		{
-			connection = DbUtil.getCon();
+			connection = JDBCUtil.getConnection();
 			String sql = "select * from t_user where username=? ";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, username);
@@ -243,9 +243,9 @@ public class UserDao implements IUserDao
 		}
 		finally
 		{
-			DbUtil.close(resultSet);
-			DbUtil.close(preparedStatement);
-			DbUtil.close(connection);
+			JDBCUtil.close(resultSet);
+			JDBCUtil.close(preparedStatement);
+			JDBCUtil.close(connection);
 		}
 		return user;
 	}

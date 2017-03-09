@@ -2,12 +2,10 @@ package com.pet.servlet;
 
 import java.io.IOException;
 
-import javax.jms.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.pet.dao.DaoFactory;
 import com.pet.dao.IUserDao;
@@ -19,7 +17,7 @@ public class LoginServlet extends HttpServlet
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		
+
 	}
 
 	@Override
@@ -40,9 +38,7 @@ public class LoginServlet extends HttpServlet
 		else
 		{
 			//登录成功
-			HttpSession session = request.getSession();
-			session.setAttribute("currentUser", user);
-			request.getRequestDispatcher("main.jsp").forward(request, response);
+			System.out.println("login sucess!!!");
 		}
 		
 	}

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.pet.dao.DaoFactory;
 import com.pet.dao.IUserDao;
 import com.pet.model.User;
+import com.sun.media.jfxmedia.events.NewFrameEvent;
 
 public class RegisterServlet extends HttpServlet
 {
@@ -41,7 +42,7 @@ public class RegisterServlet extends HttpServlet
 		System.out.println(add+"=====");
 		if(add == false)
 		{
-			request.setAttribute("rigsterError", "注册失败！用户名已存在！");
+			request.setAttribute("rigsterError", "注册失败  该用户名已存在");
 			System.out.println("qqqqqqqqqqqqqqqqq");
 
 			request.getRequestDispatcher("login.jsp").forward(request, response);
