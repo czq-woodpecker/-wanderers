@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.pet.dao.DaoFactory;
 import com.pet.dao.IUserDao;
@@ -32,23 +33,25 @@ public class RegisterServlet extends HttpServlet
 		IUserDao userDao = DaoFactory.getUserDao();
 		User user = new User();
 		user.setUsername(username);
-		System.out.println(username+"=-=-=-=");
 		user.setPassword(password);
 		user.setNickname(nickname);
 		user.setSex(sex);
 		user.setAddress(address);		
 		boolean	add = userDao.add(user);
-		System.out.println(add+"=====");
 		if(add == false)
 		{
+			//注册失败
 			request.setAttribute("rigsterError", "注册失败！用户名已存在！");
-			System.out.println("qqqqqqqqqqqqqqqqq");
-
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
 		}
-		else {
-			System.out.println("hahahhahahhahahxixixixixi");
+		else 
+		{
+			//注册成功并登陆
+			HttpSession session = request.getSession();
+			session.setAttribute("currentUser", user);
+			request.getRequestDispatcher("main.jsp").forward(request, response);
+			return;
 		}
 		
 	}
