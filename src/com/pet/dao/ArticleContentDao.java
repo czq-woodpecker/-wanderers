@@ -4,20 +4,36 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 /**
- * ÓëÊı¾İ¿â½»»¥£¬²éÑ¯Ìû×ÓÄÚÈİ
+ * ä¸æ•°æ®åº“äº¤äº’ï¼ŒæŸ¥è¯¢å¸–å­å†…å®¹
  * @author Cedo
  *
  */
 public class ArticleContentDao implements IArticleContentDao {
 
 	/**
-	 * ·µ»Ø²ÎÓëÌû×ÓµÄÆÀÂÛÕßĞÅÏ¢
+	 * è¿”å›å‚ä¸å¸–å­çš„è¯„è®ºè€…ä¿¡æ¯
 	 */
 	@Override
 	public ResultSet getArticleContent(Connection con, String questionId) throws Exception {
 		StringBuffer sql = new StringBuffer("select * from t_exchangedetails");
 		sql.append(" and exchangeId="+questionId);
 		PreparedStatement pstmt = con.prepareStatement(sql.toString().replaceFirst("and", "where"));
+		return pstmt.executeQuery();
+	}
+	
+	@Override
+	public ResultSet getArticleContent(Connection con, String questionId,int pageNo) throws Exception {
+		StringBuffer sql = new StringBuffer("select * from t_exchangedetails");
+		sql.append(" where exchangeId="+questionId);
+		
+		
+		sql.append(" order by id limit ?,?");
+		int pageSize = 4;  //æ¯é¡µ4ä¸ªè¯„è®ºæ•°æ®
+		int page = (pageNo - 1) * 4;
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
+		pstmt.setInt(1, page);
+		pstmt.setInt(2, pageSize + page);
+		
 		return pstmt.executeQuery();
 	}
 

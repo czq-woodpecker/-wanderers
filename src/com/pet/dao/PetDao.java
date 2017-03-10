@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 /**
- * ����ݿ⽻��
+ * 锟斤拷锟斤拷菘饨伙拷锟�
  * @author Cedo
  *
  */
 public class PetDao implements IPetDao{
 	/**
-	 * ����è����Ϣ�Ľ��
+	 * 锟斤拷锟斤拷猫锟斤拷锟斤拷息锟侥斤拷锟�
 	 */
 	@Override
 	public ResultSet petList(Connection con, String kind) throws Exception {
@@ -32,8 +32,8 @@ public class PetDao implements IPetDao{
 			sql.append("t_cats");
 		}
 		sql.append(" order by id limit ?,?");
-		int pageSize = 12;  //默认每页12条数据
-		int page = (pageNo - 1) * 12;//pageNo为指定页面页数，page为数据数
+		int pageSize = 12; 
+		int page = (pageNo - 1) * 12;
 		PreparedStatement pstmt = con.prepareStatement(sql.toString());
 		pstmt.setInt(1, page);
 		pstmt.setInt(2, pageSize + page);

@@ -12,4 +12,5 @@ public interface IStrayPetDao {
 	 * @throws Exception
 	 */
 	public ResultSet strayPetList(Connection con, String kind) throws Exception;
+	public ResultSet strayPetList(Connection con, String kind,int pageNo) throws Exception;
 }

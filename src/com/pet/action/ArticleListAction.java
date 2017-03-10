@@ -11,19 +11,11 @@ import com.pet.dao.DaoFactory;
 import com.pet.dao.IArticleListDao;
 import com.pet.model.ArticleList;
 import com.pet.util.DbUtil;
-/**
- * ��ȡ������Ϣ
- * @author Cedo
- *
- */
+
 public class ArticleListAction {
 
 	private IArticleListDao articleListDao = DaoFactory.getArticleListDao();
 	
-	/**
-	 * �ӽ���н�����������Ϣȡ������List
-	 * @return
-	 */
 	public List<ArticleList> getArticleList() {
 		Connection con = null;
 		try {
@@ -55,10 +47,8 @@ public class ArticleListAction {
 			}
 		}
 	}
-	/**
-	 * ����ĳ�����ӵ���Ϣ
-	 * @return
-	 */
+	
+	
 	public ArticleList getArticle(String id) {
 		Connection con = null;
 		try {
@@ -82,17 +72,15 @@ public class ArticleListAction {
 		}
 	}
 	
-	//查询分页
+
 		public List<ArticleList> getArticleList(int pageNo) {
 			Connection con = null;
 			try {
 				con = DbUtil.getCon();
 				if(pageNo==0){
-					pageNo =1;//默认当前页是第一页，如何从jsp页面中获取pageNo的值
+					pageNo =1;
 				}
-				 System.out.print("***************");
-				System.out.print(pageNo);
-				System.out.print("************");
+				
 				ResultSet rs = articleListDao.articleList(con,pageNo);
 				List<ArticleList> list = list = new ArrayList();
 				while(rs.next()) {
@@ -125,7 +113,7 @@ public class ArticleListAction {
 			}
 		}
 		
-		//计算总的页数
+		
 		public int getPage(){
 			int recordCount = 0;
 			int t1 = 0, t2 = 0;

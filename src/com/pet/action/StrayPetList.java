@@ -36,7 +36,34 @@ public class StrayPetList {
 				strayPet.setHobby(rs.getString("hobby"));
 				strayPet.setFoundAddress(rs.getString("foundAddress"));
 				list.add(strayPet);
-				System.out.println();
+			}
+			return list;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			DbUtil.close(con);
+		}
+		
+	}
+	
+	
+	public List<StrayPet> strayPetList(String kind,int pageNo) {
+		Connection con = null;
+		try {
+			con = DbUtil.getCon();
+			ResultSet rs = strayPetDao.strayPetList(con, kind,pageNo);
+			List<StrayPet> list = new ArrayList<StrayPet>();
+			while(rs.next()) {
+				StrayPet strayPet = new StrayPet();
+				strayPet.setId(rs.getInt("id"));
+				strayPet.setName(rs.getString("name"));
+				strayPet.setKind(rs.getString("kind"));
+				strayPet.setSex(rs.getString("sex"));
+				strayPet.setHobby(rs.getString("hobby"));
+				strayPet.setFoundAddress(rs.getString("foundAddress"));
+				list.add(strayPet);
+				
 			}
 			return list;
 		} catch (Exception e) {

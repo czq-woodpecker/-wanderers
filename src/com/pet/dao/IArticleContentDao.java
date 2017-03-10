@@ -5,11 +5,12 @@ import java.sql.ResultSet;
 
 
 /**
- * Ä³ÌõÌû×ÓµÄÆÀÂÛĞÅÏ¢½Ó¿Ú
+ * æŸæ¡å¸–å­çš„è¯„è®ºä¿¡æ¯æ¥å£
  * @author Cedo
  *
  */
 public interface IArticleContentDao {
 
 	public ResultSet getArticleContent(Connection con, String questionId) throws Exception;
+	public ResultSet getArticleContent(Connection con, String questionId,int pageNo) throws Exception;
 }

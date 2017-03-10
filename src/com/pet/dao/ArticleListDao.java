@@ -3,25 +3,18 @@ package com.pet.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-/**
- * ����ݿ⽻��
- * @author Cedo
- *
- */
+import java.sql.Time;
+
+import com.pet.model.ArticleList;
+
 public class ArticleListDao implements IArticleListDao {
 
-	/**
-	 * ����������Ϣ�Ľ��
-	 */
 	@Override
 	public ResultSet articleList(Connection con) throws Exception {
 		String sql = "select * from t_exchange";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		return pstmt.executeQuery();
 	}
-	/**
-	 * ����ĳ�����ӵ���Ϣ
-	 */
 
 	@Override
 	public ResultSet articleList(Connection con, String id) throws Exception {
@@ -39,6 +32,17 @@ public class ArticleListDao implements IArticleListDao {
 		pstmt.setInt(1, page);
 		pstmt.setInt(2, pageSize + page);
 		return pstmt.executeQuery();
-		
+	}
+	
+	@Override
+	public int insertArticle(Connection con, ArticleList article) throws Exception {
+		String sql = "insert intot_exchange values(null,?,?,?,?,?)";
+		PreparedStatement pstmt = con.prepareStatement(sql);
+		pstmt.setString(1, article.getTitle());
+		pstmt.setString(2, article.getPublisher());
+		pstmt.setTime(3, (Time) article.getTime());
+		pstmt.setInt(4, article.getComments());
+		pstmt.setString(5, article.getSummary());
+		return pstmt.executeUpdate();
 	}
 }
