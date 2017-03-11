@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 public class StrayPetDao implements IStrayPetDao {
-	/**
-	 * 返回流浪宠物信息结果集
-	 */
+
 	@Override
 	public ResultSet strayPetList(Connection con, String kind) throws Exception {
 		StringBuffer sql = new StringBuffer("select * from");
@@ -33,7 +31,7 @@ public class StrayPetDao implements IStrayPetDao {
 		int page = (pageNo - 1) * 9;
 		PreparedStatement pstmt = con.prepareStatement(sql.toString());
 		pstmt.setInt(1, page);
-		pstmt.setInt(2, pageSize + page);
+		pstmt.setInt(2, pageSize);
 		return pstmt.executeQuery();
 	}
 }

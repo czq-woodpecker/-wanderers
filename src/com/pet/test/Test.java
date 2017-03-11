@@ -1,12 +1,15 @@
 package com.pet.test;
 
-import com.pet.model.User;
+import java.text.ParseException;
+
 
 public class Test
 {
-//	public static void main(String[] args)
-//	{
-//		String string = "我沃恩问而非卧佛发我沃恩问而非卧佛发3我沃恩问而非卧佛发3我沃恩问而非卧佛发3我沃恩问而非卧佛发4我沃恩问而非卧佛发4我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发5我沃恩问而非卧佛发6我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发我沃恩问而非卧佛发v8888";
-//		System.out.println(string);
-//	}
+	public static void main(String[] args) throws ParseException
+	{
+	    java.util.Calendar c=java.util.Calendar.getInstance();      
+	    java.text.SimpleDateFormat f=new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");      
+	    String date = f.format(c.getTime());
+	    System.out.println(date);
+	}
 }

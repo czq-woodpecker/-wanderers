@@ -3,7 +3,7 @@ package com.pet.model;
 import java.util.Date;
 
 /**
- * Ìû×Ó
+ * å¸–å­
  * @author Cedo
  *
  */

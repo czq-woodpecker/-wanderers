@@ -8,8 +8,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.pet.action.BeautyArticleCommentAction;
+import com.pet.action.FeedKnowledgeCommentAction;
+import com.pet.action.TalkAndDicussCommentAction;
 import com.pet.dao.DaoFactory;
 import com.pet.dao.IUserDao;
+import com.pet.model.Comment;
 import com.pet.model.User;
 
 public class ArticlesContentServlet extends HttpServlet
@@ -26,30 +30,50 @@ public class ArticlesContentServlet extends HttpServlet
 	{
 		//1.获取评论内容          
 		String content = request.getParameter("content");
-//		HttpSession session = request.getSession();
-//		User currentUser = (User)session.getAttribute("currentUser");
-//		//2.获取帖子ID
+		//2.获取帖子ID
 		String questionId = request.getParameter("questionId"); 
-		//3.获取评论者用户名
-		String answerName = request.getParameter("answerName");
-		//4.获取评论时间
-		System.out.println(content+"*****");
-		System.out.println(questionId+"====");
-		System.out.println(answerName+"^^^^");
-//		System.out.println(currentUser.getId()+"***"+currentUser.getUsername());
-		
-//		IUserDao userDao = DaoFactory.getUserDao();
-//		User user = userDao.login(username, password);
+		//3.获取评论时间
+		String systemDate = request.getParameter("systemDate");
+		//4.获取页面类型
+		String page = request.getParameter("page");
+		System.out.println(page+"****");
+		//5.获取评论者
+		HttpSession session = request.getSession();
+		User currentUser = (User)session.getAttribute("currentUser");
+		if(currentUser == null)
+		{
+			request.setAttribute("error", "<a>登录后才能评论  点击登录</a>  ");
+			request.getRequestDispatcher(page).forward(request, response);
+			return;
+		}
 
-//		else
-//		{
-//			//登录成功
-//			HttpSession session = request.getSession();
-//			session.setAttribute("currentUser", user);
-//			request.getRequestDispatcher("main.jsp").forward(request, response);
-//			
-//		}
+		//实例化comment对象
+		Comment comment = new Comment();
+		comment.setContent(content);
+		comment.setAnswerName(currentUser.getUsername());
+		comment.setArticleId(Integer.parseInt(questionId));
+		comment.setTime(systemDate);
+		//更新到数据表中
+		if("beauty".equals(page))
+		{
+			//
+			BeautyArticleCommentAction commentAction = new BeautyArticleCommentAction();
+			commentAction.addComment(comment);	
+		}
+		else if ("feed".equals(page)) 
+		{
+			//
+			FeedKnowledgeCommentAction commentAction = new FeedKnowledgeCommentAction();
+			commentAction.addComment(comment);	
+		}
+		else
+		{
+			//
+			TalkAndDicussCommentAction commentAction = new TalkAndDicussCommentAction();
+			commentAction.addComment(comment);	
+		}
 		
+			
 	}
 	
 }

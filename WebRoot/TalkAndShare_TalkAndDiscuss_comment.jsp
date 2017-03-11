@@ -1,10 +1,17 @@
+<%@page import="com.pet.action.TalkAndDicussCommentAction"%>
+<%@page import="com.pet.action.TalkAndDicussListAction"%>
+<%@page import="com.pet.action.TalkAndDicussCommentAction"%>
+<%@page import="com.pet.model.Comment"%>
+<%@page import="com.pet.model.ArticleList"%>
+<%@page import="com.pet.dao.TalkAndDicussListDao"%>
+<%@page import="java.text.SimpleDateFormat"%>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@ page import="com.pet.action.ArticleListAction,com.pet.action.ArticleContentAction,com.pet.model.*" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -38,25 +45,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	
   	<%
   	  		int pageNo;
-  	  	  		if(request.getParameter("pageNo")!=null)
-  	  	  		{
-  	  		  		String pageNos = request.getParameter("pageNo");
-  	  		  		pageNo = Integer.parseInt(pageNos);
-  	  		  		
-  	  	  		}else{
-  	  	  			pageNo = 1;
-  	  	  		}
-  	  	  		String questionId = request.getParameter("id");
-  	  	  		String id = questionId;
-  	  	  		ArticleListAction dao = new ArticleListAction();
-  	  	  		ArticleList article = dao.getArticle(questionId);
-  	  	  		ArticleContentAction content = new ArticleContentAction();
-  	  	  		List<Comment> contentList = content.getArticleContent(questionId,pageNo);
-  	  	  		request.setAttribute("article", article);
-  	  	  		request.setAttribute("contentList", contentList);
-  	  	  		int total = content.getPage(questionId);
-  	  	  		request.setAttribute("total", total);
+  	  	  	  	  	  	  	  	  		if(request.getParameter("pageNo")!=null)
+  	  	  	  	  	  	  	  	  		{
+  	  	  	  	  	  	  	  		  		String pageNos = request.getParameter("pageNo");
+  	  	  	  	  	  	  	  		  		pageNo = Integer.parseInt(pageNos);
+  	  	  	  	  	  	  	  		  		
+  	  	  	  	  	  	  	  	  		}else{
+  	  	  	  	  	  	  	  	  			pageNo = 1;
+  	  	  	  	  	  	  	  	  		}
+  	  	  	  	  	  	  	  	  		String questionId = request.getParameter("id");
+  	  	  	  	  	  	  	  	  		
+  	  	  	  	  	  	  	  	  		String id = questionId;
+  	  	  	  	  	  	  	  	  		TalkAndDicussListAction dao = new TalkAndDicussListAction();
+  	  	  	  	  	  	  	  	  		ArticleList article = dao.getArticle(questionId);
+  	  	  	  	  	  	  	  	  		TalkAndDicussCommentAction content = new TalkAndDicussCommentAction();
+  	  	  	  	  	  	  	  	  		List<Comment> contentList = content.getArticleContent(questionId,pageNo);
+  	  	  	  	  	  	  	  	  		request.setAttribute("article", article);
+  	  	  	  	  	  	  	  	  		request.setAttribute("contentList", contentList);
+  	  	  	  	  	  	  	  	  		int total = content.getPage(questionId);
+  	  	  	  	  	  	  	  	  		request.setAttribute("total", total);
+  	  	  	  	  	  	  	  	  		
+  	  	  	  	  	  	  	  	  		
+  	  	  	  	  	  	  	  	  		/*获取系统时间的代码*/
+  	  	  	  	  	  	  	  			Calendar c = Calendar.getInstance();      
+  	  	  	  	  	  	  	  		    SimpleDateFormat f=new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");      
+  	  	  	  	  	  	  	  		    String systemDate = f.format(c.getTime());
   	  	%>
+  	
+  	
   	
   	<!-- page content -->
   	<div class="page-container">
@@ -75,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<p>${article.summary }</p>
 					</article>
 					<section id="comments">
-						<h3 id="comments-title">(${article.comments }) Comments</h3>
+						<h3 id="comments-title">评论数(${article.comments })</h3>
 						<ol class="commentlist">
 							<!-- foreach page -->
 							<c:forEach var="commentInfo" items="${contentList }" >
@@ -100,27 +116,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:forEach>
 						</ol>
 						<div id="pagination">
-						 <a href="articles_content.jsp?id=<%=id %>&pageNo=<%=pageNo-1 %>" class="btn">«上一页 </a>
-                        <a href="articles_content.jsp?id=<%=id %>&pageNo=1" class="btn active">1</a>
-                          	<a href="articles_content.jsp?id=<%=id %>&pageNo=2" class="btn">2</a>
-                             <a href="articles_content.jsp?id=<%=id %>&pageNo=3" class="btn">3</a>
-                             <a href="articles_content.jsp?id=<%=id %>&pageNo=<%=pageNo+1 %>" class="btn">下一页 »</a>
+						 <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=<%=pageNo-1 %>" class="btn">«上一页 </a>
+                        <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=1" class="btn active">1</a>
+                          	<a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=2" class="btn">2</a>
+                             <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=3" class="btn">3</a>
+                             <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=<%=pageNo+1 %>" class="btn">下一页 »</a>
                             
                         </div>
 					</section>
-					
-					<form action="articles_content.jsp?id=<%=id %>&pageNo=<%=pageNo %>" method="post">
+					<!-- TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=<%=pageNo %> -->
+					<form action="comment" method="post">
 					<hr>
-					<tr>
-					<td><button class="btn btn-primary"><a href="articles.jsp">发表</a></button>
-					</td></tr>
+				
 					<hr>
 						<tr>
-							<td align="center">评论内容</td>
-							<td><textarea class="ckeditor" cols="80" id="content"
+							<td align="center"><h3>评论内容</h3></td>
+							<td>
+								<!-- 提交评论内容 -->
+								<textarea class="ckeditor" cols="80" id="content"
 									name="content" rows="10"> 
-     哈哈哈哈啊哈哈啊好啊</textarea></td>
+								</textarea>
+							</td>
 						</tr>
+						<br/>
+						<!-- 提交帖子ID -->
+						<input type="hidden" name="questionId" value="<%=questionId %>" />		
+						<!--提交评论时间（系统时间）-->
+						<input type="hidden" name="systemDate" value="<%=systemDate%>"/>
+						<input type="submit" class="btn btn-primary" value="发表"/>
+						<c:if test="${currentUser==null }">
+						 	<h4 >
+						 		<a href="login.jsp"  style="color:red">（登录后才能评论   请点击登录或注册）</a>
+						 	</h4>
+						</c:if>
 					</form>
 				</div>
 	  		

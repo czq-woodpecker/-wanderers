@@ -9,12 +9,12 @@ public class Comment {
 	private int articleId;	//帖子ID
 	private String answerName;	//评论者
 	private String content;		//评论内容
-	private Date time;	//评论时间
+	private String time;	//评论时间
 	public Comment()
 	{
 
 	}
-	public Comment(int id, int articleId, String answerName, String content, Date time)
+	public Comment(int id, int articleId, String answerName, String content, String time)
 	{
 		super();
 		this.id = id;
@@ -58,11 +58,11 @@ public class Comment {
 	{
 		this.content = content;
 	}
-	public Date getTime()
+	public String getTime()
 	{
 		return time;
 	}
-	public void setTime(Date time)
+	public void setTime(String time)
 	{
 		this.time = time;
 	}

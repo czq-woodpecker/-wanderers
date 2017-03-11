@@ -3,15 +3,9 @@ package com.pet.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-/**
- * 锟斤拷锟斤拷菘饨伙拷锟�
- * @author Cedo
- *
- */
+
 public class PetDao implements IPetDao{
-	/**
-	 * 锟斤拷锟斤拷猫锟斤拷锟斤拷息锟侥斤拷锟�
-	 */
+
 	@Override
 	public ResultSet petList(Connection con, String kind) throws Exception {
 		StringBuffer sql = new StringBuffer("select * from ");
@@ -36,7 +30,7 @@ public class PetDao implements IPetDao{
 		int page = (pageNo - 1) * 12;
 		PreparedStatement pstmt = con.prepareStatement(sql.toString());
 		pstmt.setInt(1, page);
-		pstmt.setInt(2, pageSize + page);
+		pstmt.setInt(2, pageSize);
 		return pstmt.executeQuery();
 	}
 	

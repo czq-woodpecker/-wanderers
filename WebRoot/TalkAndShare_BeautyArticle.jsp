@@ -1,9 +1,9 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8" isELIgnored="false"%>
 <%
-String path = request.getContextPath();
+	String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@ page import="com.pet.action.ArticleListAction,com.pet.model.ArticleList" %>
+<%@ page import="com.pet.action.BeautyArticleListAction,com.pet.model.ArticleList" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"  %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -37,22 +37,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	<%@ include file="middle.jsp" %>
   	
   	<%
-  		ArticleListAction dao = new ArticleListAction();
-  		int pageNo;
-  		if(request.getParameter("pageNo")!=null)
-  		{
-	  		String pageNos = request.getParameter("pageNo");
-	  		pageNo = Integer.parseInt(pageNos);
-	  		
-  		}else{
-  			pageNo = 1;
-  		}
-  		
-  		List<ArticleList> list = dao.getArticleList(pageNo);
-  		request.setAttribute("list", list);
-  		int total = dao.getPage();
-  		request.setAttribute("total", total);
-  	 %>
+  	  							BeautyArticleListAction dao = new BeautyArticleListAction();
+  	  	  	  	  	  	  		int pageNo;
+  	  	  	  	  	  	  		if(request.getParameter("pageNo")!=null)
+  	  	  	  	  	  	  		{
+  	  	  	  	  	  		  		String pageNos = request.getParameter("pageNo");
+  	  	  	  	  	  		  		pageNo = Integer.parseInt(pageNos);
+  	  	  	  	  	  		  		
+  	  	  	  	  	  	  		}else{
+  	  	  	  	  	  	  			pageNo = 1;
+  	  	  	  	  	  	  		}
+  	  	  	  	  	  	  		
+  	  	  	  	  	  	  		List<ArticleList> list = dao.getArticleList(pageNo);
+  	  	  	  	  	  	  		request.setAttribute("list", list);
+  	  	  	  	  	  	  		int total = dao.getPage();
+  	  	  	  	  	  	  		request.setAttribute("total", total);
+  	  	%>
   	
   	<!-- start of the page content -->
      <div class="page-container">
@@ -78,12 +78,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                         </article>
                         </c:forEach>   		
                         <div id="pagination">
-                          	 	<a href="articles.jsp" class="btn">首页</a>
-                                <a href="articles.jsp?pageNo=1" class="btn">1</a>
-                      		 	<a href="articles.jsp?pageNo=2" class="btn">2</a>
-                                <a href="articles.jsp?pageNo=3" class="btn">3</a>
-                                <a href="articles.jsp?pageNo=<%=pageNo-1 %> "class="btn">上一页 »</a>
-                                <a href="articles.jsp?pageNo=<%=pageNo+1 %>" class="btn">下一页»</a>
+                          	 	<a href="TalkAndShare_BeautyArticle.jsp" class="btn">首页</a>
+                                <a href="TalkAndShare_BeautyArticle.jsp?pageNo=1" class="btn">1</a>
+                      		 	<a href="TalkAndShare_BeautyArticle.jsp?pageNo=2" class="btn">2</a>
+                                <a href="TalkAndShare_BeautyArticle.jsp?pageNo=3" class="btn">3</a>
+                                <a href="TalkAndShare_BeautyArticle.jsp?pageNo=<%=pageNo-1 %> "class="btn">上一页 »</a>
+                                <a href="TalkAndShare_BeautyArticle.jsp?pageNo=<%=pageNo+1 %>" class="btn">下一页»</a>
                                 <h4>共${total}页</h4>
                            </div>
 					</div>

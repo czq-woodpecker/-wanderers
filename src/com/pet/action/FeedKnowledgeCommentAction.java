@@ -6,28 +6,28 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pet.dao.IArticleContentDao;
 import com.pet.dao.DaoFactory;
+import com.pet.dao.ICommentDao;
 import com.pet.model.Comment;
 import com.pet.model.ArticleList;
 import com.pet.util.DbUtil;
 
 
-public class ArticleContentAction {
+public class FeedKnowledgeCommentAction {
 
-	private IArticleContentDao articleContentDao = DaoFactory.getArticleContentDao();
+	private ICommentDao feedKnowledgeCommentDao = DaoFactory.getFeedKnowledgeCommentDao();
 	
 	public List<Comment> getArticleContent(String questionId) {
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
-			ResultSet rs = articleContentDao.getArticleContent(con, questionId);
+			ResultSet rs = feedKnowledgeCommentDao.getArticleContent(con, questionId);
 			List<Comment> contentList = new ArrayList();
 			while(rs.next()) {
 				Comment content = new Comment();
 				content.setAnswerName(rs.getString("answerName"));
 				content.setContent(rs.getString("content"));
-				content.setTime(rs.getDate("time"));
+				content.setTime(rs.getString("time"));
 				contentList.add(content);
 			}
 			return contentList;
@@ -44,13 +44,13 @@ public class ArticleContentAction {
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
-			ResultSet rs = articleContentDao.getArticleContent(con,questionId,pageNo);
+			ResultSet rs = feedKnowledgeCommentDao.getArticleContent(con,questionId,pageNo);
 			List<Comment> contentList = new ArrayList();
 			while(rs.next()) {
 				Comment content = new Comment();
 				content.setAnswerName(rs.getString("answerName"));
 				content.setContent(rs.getString("content"));
-				content.setTime(rs.getDate("time"));
+				content.setTime(rs.getString("time"));
 				contentList.add(content);
 			}
 			return contentList;
@@ -69,7 +69,7 @@ public class ArticleContentAction {
 		Connection con = null;
 		try {
 			con = DbUtil.getCon();
-			ResultSet rs = articleContentDao.getArticleContent(con, questionId);
+			ResultSet rs = feedKnowledgeCommentDao.getArticleContent(con, questionId);
 			List<Comment> contentList = new ArrayList();
 
 			while (rs.next()) {
@@ -77,7 +77,7 @@ public class ArticleContentAction {
 				Comment content = new Comment();
 				content.setAnswerName(rs.getString("answerName"));
 				content.setContent(rs.getString("content"));
-				content.setTime(rs.getDate("time"));
+				content.setTime(rs.getString("time"));   //setTime(rs.getDate("time"));
 				contentList.add(content);
 
 			}
@@ -86,12 +86,25 @@ public class ArticleContentAction {
 			t2 = recordCount / 4;
 			}catch(Exception e){
 				e.printStackTrace();
-				return 1;
+				
 		}
 		if (t1 != 0) {
 			t2 = t2 + 1;
 		}
 		return t2;
 		
+	}
+	
+	public  void addComment(Comment comment)
+	{
+		Connection con = null;
+		try {
+			con = DbUtil.getCon();
+			feedKnowledgeCommentDao.addArticleContent(con, comment);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+				DbUtil.close(con);
+		}
 	}
 }

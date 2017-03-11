@@ -6,15 +6,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.pet.dao.ArticleListDao;
 import com.pet.dao.DaoFactory;
 import com.pet.dao.IArticleListDao;
 import com.pet.model.ArticleList;
 import com.pet.util.DbUtil;
 
-public class ArticleListAction {
+public class FeedKnowledgeListAction {
 
-	private IArticleListDao articleListDao = DaoFactory.getArticleListDao();
+	private IArticleListDao articleListDao = DaoFactory.getFeedKnowledgeListDao();
 	
 	public List<ArticleList> getArticleList() {
 		Connection con = null;
@@ -35,7 +34,6 @@ public class ArticleListAction {
 				articleList.setSummary(summary);
 				articleList.setTime(rs.getDate("time"));
 				list.add(articleList);
-				System.out.println(articleList.getId());
 			}
 			return list;
 		} catch (Exception e) {
@@ -96,7 +94,6 @@ public class ArticleListAction {
 					articleList.setSummary(summary);
 					articleList.setTime(rs.getDate("time"));
 					list.add(articleList);
-					System.out.println(articleList.getId());
 				}
 				return list;
 			} catch (Exception e) {
@@ -132,11 +129,12 @@ public class ArticleListAction {
 					list.add(articleList);
 				}
 				recordCount = list.size();
-				t1 = recordCount % 12;
-				t2 = recordCount / 12;
+				
+				t1 = recordCount % 5;
+				t2 = recordCount / 5;
 				}catch(Exception e){
 					e.printStackTrace();
-					return 1;
+					
 			}
 			if (t1 != 0) {
 				t2 = t2 + 1;

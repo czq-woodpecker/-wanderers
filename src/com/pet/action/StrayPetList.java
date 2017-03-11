@@ -12,12 +12,6 @@ import com.pet.model.Pet;
 import com.pet.model.StrayPet;
 import com.pet.util.DbUtil;
 
-
-/**
- * �ӽ���н�����è����Ϣȡ������List
- * @author Cedo
- *
- */
 public class StrayPetList {
 	private IStrayPetDao strayPetDao = DaoFactory.getStrayPetDao();
 	
