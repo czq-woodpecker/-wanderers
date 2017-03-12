@@ -8,7 +8,7 @@
            <header>
                <div class="container">
                              <!-- Website Logo -->
-                             <a href="top.jsp"  title="Tramp">
+                             <a href="main.jsp"  title="Wandering">
                                      <img src="images/logo.png" alt="流浪者">
                              </a>
                     <!-- Start of Main Navigation -->
@@ -20,14 +20,14 @@
                                  <li><a href="petsOfWorld.jsp?kind=dog">世界狗谱</a></li>
                                  <li><a href="stray_pet.jsp?kind=cat">流浪猫区</a></li>
                                  <li><a href="stray_pet.jsp?kind=dog">流浪狗区</a></li>
-                                 <li><a href="">交流分享</a>
+                                 <li><a>交流分享</a>
                                          <ul class="sub-menu">
                                                  <li><a href="TalkAndShare_FeedKnowledge.jsp">喂养知识</a></li>
                                                  <li class="current-menu-item"><a href="TalkAndShare_TalkAndDiscuss.jsp">交流讨论</a></li>
                                                  <li><a href="TalkAndShare_BeautyArticle.jsp">情感鸡汤</a></li>
                                          </ul>
                                  </li>
-                                 <li><a href="#">关于我们</a></li>
+                                 <li><a href="forUs.jsp">关于我们</a></li>
                                  <li>                  
 	                           		<c:choose>
 	                            	<c:when test="<%=currentUser==null %>">

@@ -34,13 +34,18 @@ public class BeautyArticleListDao implements IArticleListDao {
 		return pstmt.executeQuery();
 	}
 	
+
+	
+	/**
+	 * 增加帖子
+	 */
 	@Override
 	public int insertArticle(Connection con, ArticleList article) throws Exception {
 		String sql = "insert into t_beauty values(null,?,?,?,?,?)";
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, article.getTitle());
 		pstmt.setString(2, article.getPublisher());
-		pstmt.setTime(3, (Time) article.getTime());
+		pstmt.setString(3, article.getTime());
 		pstmt.setInt(4, article.getComments());
 		pstmt.setString(5, article.getSummary());
 		return pstmt.executeUpdate();

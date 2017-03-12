@@ -38,11 +38,15 @@ public class UserDao implements IUserDao
 					return false;
 				}
 			}
-			sql = "insert into t_user (username,password,nickname) value (?,?,?)";
+			sql = "insert into t_user (username,password,nickname,sex,address) value (?,?,?,?,?)";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, user.getUsername());
 			preparedStatement.setString(2, user.getPassword());
 			preparedStatement.setString(3, user.getNickname());
+			preparedStatement.setString(4, user.getSex());
+			
+			preparedStatement.setString(5, user.getAddress());
+	
 //			preparedStatement.setInt(4, user.getType());
 //			preparedStatement.setInt(5, user.getStatus());
 			//4.更新至数据库
@@ -101,13 +105,15 @@ public class UserDao implements IUserDao
 		try
 		{
 			connection = DbUtil.getCon();
-			String sql = "update t_user set password = ?,nickname = ? where id = ?";
+			String sql = "update t_user set password = ?,nickname = ?,sex = ?,address = ? where id = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, user.getPassword());
 			preparedStatement.setString(2, user.getNickname());
+			preparedStatement.setString(3, user.getSex());
+			preparedStatement.setString(4, user.getAddress());
 //			preparedStatement.setInt(3, user.getType());
 //			preparedStatement.setInt(4, user.getStatus());
-			preparedStatement.setInt(3,user.getId());
+			preparedStatement.setInt(5,user.getId());
 			preparedStatement.executeUpdate();	
 			
 		} 
@@ -144,6 +150,9 @@ public class UserDao implements IUserDao
 				user.setUsername(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
 				user.setNickname(resultSet.getString("nickname"));
+				user.setSex(resultSet.getString("sex"));
+				user.setAddress(resultSet.getString("address"));
+				user.setAdoptedPets(resultSet.getString("adoptedPets"));
 //				user.setType(resultSet.getInt("type"));
 //				user.setStatus(resultSet.getInt("status"));
 			}
@@ -182,6 +191,8 @@ public class UserDao implements IUserDao
 				user.setUsername(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
 				user.setNickname(resultSet.getString("nickname"));
+				user.setSex(resultSet.getString("sex"));
+				user.setAddress(resultSet.getString("address"));
 //				user.setType(resultSet.getInt("type"));
 //				user.setStatus(resultSet.getInt("status"));
 				users.add(user);
@@ -222,13 +233,12 @@ public class UserDao implements IUserDao
 				user.setUsername(resultSet.getString("username"));
 				user.setPassword(resultSet.getString("password"));
 				user.setNickname(resultSet.getString("nickname"));
-//				user.setType(resultSet.getInt("type"));
-//				user.setStatus(resultSet.getInt("status"));
+				user.setSex(resultSet.getString("sex"));
+				user.setAddress(resultSet.getString("address"));
+				user.setAdoptedPets(resultSet.getString("adoptedPets"));
 			}			
 			if(!user.getPassword().equals(password))
 			{
-				
-
 				user = null;
 			}
 //			if(user.getStatus() == 1)

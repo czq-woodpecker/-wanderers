@@ -14,7 +14,7 @@ public class ArticleList {
 	private String publisher;
 	private int comments;
 	private String summary;
-	private Date time;
+	private String time;
 	public ArticleList() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -57,10 +57,10 @@ public class ArticleList {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Date getTime() {
+	public String getTime() {
 		return time;
 	}
-	public void setTime(Date time) {
+	public void setTime(String time) {
 		this.time = time;
 	}
 	

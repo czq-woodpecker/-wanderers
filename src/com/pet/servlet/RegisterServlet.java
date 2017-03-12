@@ -24,7 +24,6 @@ public class RegisterServlet extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		System.out.print("submiteddealing!!!");
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		String nickname = request.getParameter("nickname");

@@ -4,7 +4,7 @@
                       <div class="row">
                               <div class="span6">
                                       <p class="copyright">
-                                              Copyright © 2017. By Tramp 
+                                              Copyright © 2017. By Wandering 
                                       </p>
                               </div>
                             <div class="span6">

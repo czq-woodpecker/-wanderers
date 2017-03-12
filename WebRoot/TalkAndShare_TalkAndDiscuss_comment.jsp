@@ -84,8 +84,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<h1 class="post-title">${article.title }</h1>
 						<div class="post-meta clearfix">
 							<span class="date">${article.time }</span>
-							<span class="category"><a>${article.publisher }</a></span>
-							<span class="comments"><a title="${article.title }">${article.comments } Comments</a></span>
+							<span class="category">${article.publisher }</span>
+							<span class="comments">${article.comments } Comments</span>
                             <span class="like-count">66</span>
 						</div>
 						<p>${article.summary }</p>
@@ -97,7 +97,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<c:forEach var="commentInfo" items="${contentList }" >
 								<li class="comment even thread-even depth-1" id="li-comment-2">
 									<article id="comment-2">
-										<img alt="" src="images/temp/timg2.jpg" class="avatar avatar-60 photo" height="60" width="60">
+										<img alt="" src="images/touxiang.jpg" class="avatar avatar-60 photo" height="60" width="60">
 										<div class="comment-meta">
 											<h5 class="author">
 												<cite class="fn">
@@ -116,15 +116,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							</c:forEach>
 						</ol>
 						<div id="pagination">
-						 <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=<%=pageNo-1 %>" class="btn">«上一页 </a>
-                        <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=1" class="btn active">1</a>
-                          	<a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=2" class="btn">2</a>
-                             <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=3" class="btn">3</a>
-                             <a href="TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=<%=pageNo+1 %>" class="btn">下一页 »</a>
+						 <a href="TalkAndShare_TalkAndDiscuss_comment.jsp?id=<%=id %>&pageNo=<%=pageNo-1 %>" class="btn">«上一页 </a>
+                        <a href="TalkAndShare_TalkAndDiscuss_comment.jsp?id=<%=id %>&pageNo=1" class="btn active">1</a>
+                          	<a href="TalkAndShare_TalkAndDiscuss_comment.jsp?id=<%=id %>&pageNo=2" class="btn">2</a>
+                             <a href="TalkAndShare_TalkAndDiscuss_comment.jsp?id=<%=id %>&pageNo=3" class="btn">3</a>
+                             <a href="TalkAndShare_TalkAndDiscuss_comment.jsp?id=<%=id %>&pageNo=<%=pageNo+1 %>" class="btn">下一页 »</a>
                             
                         </div>
 					</section>
-					<!-- TalkAndShare_BeautyArticle_comment.jsp?id=<%=id %>&pageNo=<%=pageNo %> -->
 					<form action="comment" method="post">
 					<hr>
 				
@@ -143,6 +142,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<input type="hidden" name="questionId" value="<%=questionId %>" />		
 						<!--提交评论时间（系统时间）-->
 						<input type="hidden" name="systemDate" value="<%=systemDate%>"/>
+						<!--提交页面-->
+						<input type="hidden" name="page" value="talk"/>
+						<input type="hidden" name="pageUrl" value="TalkAndShare_TalkAndDiscuss_comment.jsp?id=<%=questionId %>"/>
 						<input type="submit" class="btn btn-primary" value="发表"/>
 						<c:if test="${currentUser==null }">
 						 	<h4 >
@@ -154,12 +156,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		
 		  		<aside class="span4 page-sidebar">
 						<section class="wiget">
-							<div class="support-widget">
-								<h3 class="title">用户名:</h3>
-								<p class="intro">用户介绍</p>
-								<button class="btn btn-link"><a href="postArticles.jsp" style="color:#FF9933">发布新帖</a></button>
-							</div>
-						</section>
+						<c:if test="<%=currentUser!=null %>">
+						<div class="support-widget">
+							<h3 class="title">用户名:<%=currentUser.getNickname() %></h3>
+							<p class="intro">用户介绍:性别<%=currentUser.getSex()%></p>
+							<button class="btn btn-link "><a href="postArticles.jsp" style="color:#FF9933">发布新帖</a></button>
+						</div>
+						</c:if>
+					</section>
 						<section class="wiget">
 							<div class="widget">
 								<h3 class="title">热门交流帖</h3>

@@ -71,7 +71,7 @@
 					</header> 
 					</article>
 				</div>
-				<form name="newsPost" action="articles.jsp" method="post" onSubmit="return CheckForm();">
+				<form name="newsPost" action="articleInsert" method="post" onSubmit="return CheckForm();">
 					<table align="left" width="740">
 						<tr>
 							<td align="center">标题</td>
@@ -91,7 +91,6 @@
 						<tr>
 							<td align="center">帖子内容</td>
 							<td><textarea class="ckeditor" cols="80" id="content" name="content" rows="10"> 
-     							哈哈哈哈
     							</textarea>
     						
     						</td>
@@ -101,7 +100,7 @@
 						<td>
 							<td colspan="2" align="center">
 							<input type="submit" value="发布" class="button"/> 
-							<input type="reset" value="重置" class="button"/>
+							<span color="red"><a href="login.jsp">${error }</a></span>
 							</td>
 						</td>
 						</tr>
@@ -110,11 +109,13 @@
 				</form>
 				<aside class="span4 page-sidebar">
 						<section class="wiget">
+							<c:if test="<%=currentUser!=null %>">
 							<div class="support-widget">
-								<h3 class="title">用户名:</h3>
-								<p class="intro">用户介绍</p>
-								
+								<h3 class="title">用户名:<%=currentUser.getNickname() %></h3>
+								<p class="intro">用户介绍:性别<%=currentUser.getSex()%></p>
+								<button class="btn btn-link ">发布新帖</button>
 							</div>
+							</c:if>
 						</section>
 						<section class="wiget">
 							<div class="widget">

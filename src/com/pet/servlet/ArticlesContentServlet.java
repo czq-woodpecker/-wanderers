@@ -11,8 +11,7 @@ import javax.servlet.http.HttpSession;
 import com.pet.action.BeautyArticleCommentAction;
 import com.pet.action.FeedKnowledgeCommentAction;
 import com.pet.action.TalkAndDicussCommentAction;
-import com.pet.dao.DaoFactory;
-import com.pet.dao.IUserDao;
+
 import com.pet.model.Comment;
 import com.pet.model.User;
 
@@ -36,14 +35,15 @@ public class ArticlesContentServlet extends HttpServlet
 		String systemDate = request.getParameter("systemDate");
 		//4.获取页面类型
 		String page = request.getParameter("page");
-		System.out.println(page+"****");
 		//5.获取评论者
 		HttpSession session = request.getSession();
 		User currentUser = (User)session.getAttribute("currentUser");
+		//6.
+		String pageUrl = request.getParameter("pageUrl");
 		if(currentUser == null)
 		{
 			request.setAttribute("error", "<a>登录后才能评论  点击登录</a>  ");
-			request.getRequestDispatcher(page).forward(request, response);
+			request.getRequestDispatcher("login.jsp").forward(request, response);
 			return;
 		}
 
@@ -53,6 +53,7 @@ public class ArticlesContentServlet extends HttpServlet
 		comment.setAnswerName(currentUser.getUsername());
 		comment.setArticleId(Integer.parseInt(questionId));
 		comment.setTime(systemDate);
+		
 		//更新到数据表中
 		if("beauty".equals(page))
 		{
@@ -72,6 +73,10 @@ public class ArticlesContentServlet extends HttpServlet
 			TalkAndDicussCommentAction commentAction = new TalkAndDicussCommentAction();
 			commentAction.addComment(comment);	
 		}
+		//评论完跳到哪里的问题
+		response.sendRedirect(pageUrl);
+		
+
 		
 			
 	}

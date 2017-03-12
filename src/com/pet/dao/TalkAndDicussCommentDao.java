@@ -18,8 +18,8 @@ public class TalkAndDicussCommentDao implements ICommentDao {
 	@Override
 	public ResultSet getArticleContent(Connection con, String questionId) throws Exception {
 		StringBuffer sql = new StringBuffer("select * from t_talkanddicuss");
-		sql.append(" and exchangeId="+questionId);
-		PreparedStatement pstmt = con.prepareStatement(sql.toString().replaceFirst("and", "where"));
+		sql.append(" where exchangeId="+questionId);
+		PreparedStatement pstmt = con.prepareStatement(sql.toString());
 		return pstmt.executeQuery();
 	}
 	

@@ -68,13 +68,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	                                </h3>
 	                                <div class="post-meta clearfix">
 	                                	<span class="date">${articleList.time }</span>
-	                                	<span class="category"><a ><c:out value="${articleList.publisher }"></c:out></a></span>
-	                                    <span class="comments"><a title="${articleList.title }"><c:out value="${articleList.comments }"></c:out>&nbsp;Comments</a></span>
+	                                	<span class="category"><c:out value="${articleList.publisher }"></c:out></span>
+	                                    <span class="comments"><a style="color:gray" href="TalkAndShare_BeautyArticle_comment.jsp?id=${articleList.id }"><c:out value="${articleList.comments }"></c:out>&nbsp;Comments</a></span>
 	                                	<span class="like-count">66</span>
 	                                 </div>
 	                               <!-- end of post meta -->
 	                            </header>
-	                            <p><c:out value="${articleList.summary }"></c:out>......<a class="readmore-link" href="articles_content.jsp?id=${articleList.id }">Read more</a></p>
+	                            <p><c:out value="${articleList.summary }"></c:out>......<a class="readmore-link" href="TalkAndShare_BeautyArticle_comment.jsp?id=${articleList.id }">Read more</a></p>
 	                         </article>
                         </c:forEach>   		
                         <div id="pagination">
@@ -90,11 +90,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				<aside class="span4 page-sidebar">
 					<section class="wiget">
+						<c:if test="<%=currentUser!=null %>">
 						<div class="support-widget">
-							<h3 class="title">用户名</h3>
-							<p class="intro">用户介绍</p>
+							<h3 class="title">用户名:<%=currentUser.getNickname() %></h3>
+							<p class="intro">用户介绍:性别<%=currentUser.getSex()%></p>
 							<button class="btn btn-link "><a href="postArticles.jsp">发表新文章</a></button>
 						</div>
+						</c:if>
 					</section>
 					<section class="wiget">
 						<div class="widget">

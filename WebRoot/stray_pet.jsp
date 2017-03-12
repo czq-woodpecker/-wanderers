@@ -75,10 +75,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               		
               		</c:if>
               		<div class="span4" style="width:28.8%" >
-              			<img src="images/img01.jpg" height="192.844" width="270"  />
+              			<img src="images/cat01.jpg" height="192.844" width="270"  />
 				  	  	<h3>品种：${pet.kind }</h3>
 				  	  	<h4>姓名：${pet.name }</h4>
 				  	  	<button class="btn btn-info" onclick="show('${pet.kind}','${pet.name }','${pet.sex }','${pet.hobby }','${pet.foundAddress }')">详情</button>
+              			<hr />
               		</div>
               		</c:forEach>
               		<div class="span6" style="margin-top:20px">

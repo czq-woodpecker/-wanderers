@@ -40,7 +40,7 @@ public class TalkAndDicussListDao implements IArticleListDao {
 		PreparedStatement pstmt = con.prepareStatement(sql);
 		pstmt.setString(1, article.getTitle());
 		pstmt.setString(2, article.getPublisher());
-		pstmt.setTime(3, (Time) article.getTime());
+		pstmt.setString(3, article.getTime());
 		pstmt.setInt(4, article.getComments());
 		pstmt.setString(5, article.getSummary());
 		return pstmt.executeUpdate();

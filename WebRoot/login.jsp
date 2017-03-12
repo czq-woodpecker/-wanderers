@@ -98,9 +98,9 @@
                 
                 <li>
               		<label class="input-tips2">性别：</label>
-                    <div class="inputOuter2 inputstyle2">                
-                    	<input type="radio" name="sex" value="1" />男		<!-- 在value语句中加上checked="checked" -->
-						<input type="radio" name="sex" value="0" />女                               		     
+                    <div class="inputOuter2">                
+                    	<input type="radio" name="sex" value="男"  class="inputstyle3" checked="checked">男</input>		<!-- 在value语句中加上checked="checked" -->
+						<input type="radio" name="sex" value="女" class="inputstyle3">女</input>                               		     
                      </div>            
                 </li>
                 

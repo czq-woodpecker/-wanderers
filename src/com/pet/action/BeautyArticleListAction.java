@@ -33,7 +33,7 @@ public class BeautyArticleListAction {
 					summary = summary.substring(0, 300);
 				}
 				articleList.setSummary(summary);
-				articleList.setTime(rs.getDate("time"));
+				articleList.setTime(rs.getString("time"));
 				list.add(articleList);
 				
 			}
@@ -61,7 +61,7 @@ public class BeautyArticleListAction {
 				article.setPublisher(rs.getString("publisher"));
 				article.setComments(rs.getInt("comments"));
 				article.setSummary(rs.getString("summary"));
-				article.setTime(rs.getDate("time"));
+				article.setTime(rs.getString("time"));
 			}
 			return article;
 		} catch (Exception e) {
@@ -94,7 +94,7 @@ public class BeautyArticleListAction {
 						summary = summary.substring(0, 300);
 					}
 					articleList.setSummary(summary);
-					articleList.setTime(rs.getDate("time"));
+					articleList.setTime(rs.getString("time"));
 					list.add(articleList);
 					
 				}
@@ -142,6 +142,22 @@ public class BeautyArticleListAction {
 				t2 = t2 + 1;
 			}
 			return t2;
-			
 		}
+		
+		/*
+		 * 增加帖子
+		 * */
+		public int insertArticle(ArticleList article) {
+			Connection con = null;
+			try {
+				con = DbUtil.getCon();
+				return articleListDao.insertArticle(con, article);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}finally {
+				DbUtil.close(con);
+			}
+			return 0;
+		}
+
 }
