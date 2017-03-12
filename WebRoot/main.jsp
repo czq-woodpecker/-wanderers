@@ -199,7 +199,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				  </div>
 				<div class="col-md-9 post-details">
 					<a href="stray_pet.jsp?kind=cat"><h3>了解最新的流浪猫信息</h3></a>
-					<h4>在这里你可以通过我们领取一只流浪狗并好好照顾它。还可以学到照顾宠物的方法和喂养知识。</h4>
+					<h4>在这里你可以通过我们领取一只流浪猫并好好照顾它。还可以学到照顾宠物的方法和喂养知识。</h4>
 					<div class="read">
 						<a class="button" href="stray_pet.jsp?kind=cat"><img src="bootstrap3/index/images/read.png" alt="" /></a>
 					</div>
@@ -214,7 +214,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class="clearfix"> </div>
 				  </div>
 				<div class="col-md-9 post-details">
-					<a href="stray_pet.jsp?kind=dog"><h3>了解最新的流浪猫信息</h3></a>
+					<a href="stray_pet.jsp?kind=dog"><h3>了解最新的流浪狗信息</h3></a>
 					<h4>在这里你可以通过我们领取一只流浪狗并好好照顾它。还可以学到照顾宠物的方法和喂养知识。</h4>
 					<div class="read">
 						<a class="button" href="stray_pet.jsp?kind=cat"><img src="bootstrap3/index/images/read.png" alt="" /></a>
