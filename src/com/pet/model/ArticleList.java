@@ -20,12 +20,13 @@ public class ArticleList {
 		// TODO Auto-generated constructor stub
 	}
 	public ArticleList(String title, String publisher, int comments,
-			String summary) {
+			String summary,String time) {
 		super();
 		this.title = title;
 		this.publisher = publisher;
 		this.comments = comments;
 		this.summary = summary;
+		this.time = time;
 	}
 	public String getTitle() {
 		return title;

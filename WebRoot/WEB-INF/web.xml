@@ -53,4 +53,12 @@
     <servlet-name>articlesContentServlet</servlet-name>
     <url-pattern>/comment</url-pattern>
   </servlet-mapping>
+   <servlet>
+    <servlet-name>articleInsertServlet</servlet-name>
+    <servlet-class>com.pet.servlet.ArticleInsertServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>articleInsertServlet</servlet-name>
+    <url-pattern>/articleInsert</url-pattern>
+  </servlet-mapping>
 </web-app>
